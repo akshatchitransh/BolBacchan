@@ -31,7 +31,7 @@ function Homepage() {
       >
          <Flex justify="center" align="center" height="100px">
           <Text fontSize="4xl" fontFamily="Work sans" color="black">
-            Talk-A-Tive
+           Bol Bacchan
           </Text>
         </Flex>
       </Box>
