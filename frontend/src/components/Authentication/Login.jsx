@@ -54,7 +54,7 @@ export const Login = () => {
         { email, password },
         config
       );
-
+console.log(data)
       toast({
         title: "Login Successful",
         status: "success",
@@ -117,7 +117,7 @@ export const Login = () => {
       </Button>
       <Button
         variant="solid"
-        colorScheme="red"
+        colorScheme="green"
         width="100%"
         onClick={() => {
           setEmail("guest@example.com");
