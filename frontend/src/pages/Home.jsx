@@ -11,11 +11,18 @@ import {
 import { Flex} from '@chakra-ui/react';
 import {Login} from "../components/Authentication/Login";
 import Signup from "../components/Authentication/Signup";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 
 
 function Homepage() {
-  
+  const navigate = useNavigate();
+  useEffect(()=>{
+    const user = JSON.parse(localStorage.getItem("userInfo"))
+
+    if(user) navigate("/chat")
+  },[navigate])
 
   return (
     <Container maxW="xl" centerContent>
