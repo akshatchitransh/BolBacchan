@@ -5,15 +5,19 @@ import { getSender, getSenderFull } from "../config/ChatLogics";
 import ProfileModal from "./miscellaneous/ProfileModal";
 import ScrollableChat from "./ScrollableChat";
 import "./styles.css";
-
+import io from 'socket.io-client'
 import { ChatState } from "../Context/ChatProvider";
 import { Box, FormControl, IconButton, Input, Spinner, useToast, Text } from '@chakra-ui/react';
 import UpdateGroupChatModal from "./miscellaneous/UpdateGroupChatModal";
+const ENDPOINT = "http://localhost:3009"; 
+var socket, selectedChatCompare;
+
 
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
   const [newMessage, setNewMessage] = useState("");
+   const [socketConnected, setSocketConnected] = useState(false);
   const toast = useToast();
 
   const { selectedChat, setSelectedChat, user } = ChatState();
@@ -36,14 +40,14 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
       );
       setMessages(data);
       setLoading(false);
-
+socket.emit("join chat", selectedChat._id);
       // socket.emit("join chat", selectedChat._id); // Removed
     } catch (error) {
       toast({
         title: "Error Occurred!",
         description: "Failed to load the messages",
         status: "error",
-        duration: 5000,
+        duration: 3004,
         isClosable: true,
         position: "bottom",
       });
@@ -68,7 +72,10 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
           },
           config
         );
-        // socket.emit("new message", data); // Removed
+        
+
+  socket.emit("new message", data);
+
         setMessages([...messages, data]);
       } catch (error) {
         toast({
@@ -82,10 +89,33 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
       }
     }
   };
+   useEffect(() => {
+    socket = io(ENDPOINT);
+     socket.emit("setup", user);
+    socket.on("connected", () => setSocketConnected(true));
+   
+  }, []);
 
   useEffect(() => {
     fetchMessages();
+    selectedChatCompare = selectedChat;
   }, [selectedChat]);
+
+   useEffect(() => {
+    socket.on("message recieved", (newMessageRecieved) => {
+      if (
+        !selectedChatCompare || // if chat is not selected or doesn't match current chat
+        selectedChatCompare._id !== newMessageRecieved.chat._id
+      ) {
+        if (!notification.includes(newMessageRecieved)) {
+          setNotification([newMessageRecieved, ...notification]);
+          setFetchAgain(!fetchAgain);
+        }
+      } else {
+        setMessages([...messages, newMessageRecieved]);
+      }
+    });
+  });
 
   const typingHandler = (e) => {
     setNewMessage(e.target.value);

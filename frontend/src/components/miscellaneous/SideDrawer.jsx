@@ -28,7 +28,7 @@ import {
   DrawerCloseButton,
 } from '@chakra-ui/react'
 import ChatLoading from '../ChatLoading'
-import UserListItem from '../UserAvatar/UserListItem'
+import UserListItem from '../userAvatar/UserListItem'
 import axios from "axios";
 
 
@@ -39,7 +39,7 @@ const [search, setSearch] = useState("");
   const [searchResult, setSearchResult] = useState([]);
   const [loading, setLoading] = useState(false);
   const [loadingChat, setLoadingChat] = useState(false);
-  const { user } = ChatState();
+  const { user, chats, setChats, setSelectedChat} = ChatState();
  const navigate = useNavigate();
 const toast = useToast();
 const { isOpen, onOpen, onClose } = useDisclosure()
