@@ -21,7 +21,7 @@ function Homepage() {
   useEffect(()=>{
     const user = JSON.parse(localStorage.getItem("userInfo"))
 
-    if(user) navigate("/chat")
+    if(user) navigate("/chats")
   },[navigate])
 
   return (

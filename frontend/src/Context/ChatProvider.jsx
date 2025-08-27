@@ -19,7 +19,7 @@ const ChatProvider = ({ children }) => {
   }, [navigate]);
 
   return (
-    <ChatContext.Provider
+   <ChatContext.Provider
       value={{
         selectedChat,
         setSelectedChat,
