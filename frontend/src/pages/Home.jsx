@@ -29,20 +29,21 @@ function Homepage() {
       <Box
         d="flex"
         justifyContent="center"
-        p={3}
-        bg="orange"
+        p={5}
+        bg=""
         w="100%"
         m="40px 0 15px 0"
         borderRadius="lg"
-        borderWidth="1px"
+        //borderWidth="1.5px"
+        //borderColor={"pink.100"}
       >
-         <Flex justify="center" align="center" height="100px">
+         <Flex justify="center" align="down" height="50px">
           <Text fontSize="4xl" fontFamily="Work sans" color="black">
-           Bol Bacchan
+           BOL-BACCHAN
           </Text>
         </Flex>
       </Box>
-      <Box bg="white" w="100%" p={4} borderRadius="lg" borderWidth="1px">
+      <Box bg="white" w="100%" p={4} borderRadius="lg"  borderColor={"pink.100"}>
         <Tabs isFitted variant="soft-rounded">
           <TabList mb="1em">
             <Tab>Login</Tab>
