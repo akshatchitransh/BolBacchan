@@ -10,7 +10,7 @@ import { Box, Button, FormControl, Input, Modal, ModalBody, ModalCloseButton, Mo
 import { ChatState } from "../../Context/ChatProvider";
 import axios from "axios";
 import { useState } from "react";
-import UserListItem from "../userAvatar/UserListItem";
+import UserListItem from "../UserAvatar/UserListItem";
 import UserBadgeItem from "../userAvatar/UserBadgeItem";
 
 
