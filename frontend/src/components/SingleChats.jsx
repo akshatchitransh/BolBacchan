@@ -19,7 +19,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   const [newMessage, setNewMessage] = useState("");
    const [socketConnected, setSocketConnected] = useState(false);
      const [typing, setTyping] = useState(false);
-  const [istyping, setIsTyping] = useState(false);
+  const [istyping, _setIsTyping] = useState(false);
   const toast = useToast();
 
   const { selectedChat, setSelectedChat, user } = ChatState();
@@ -44,7 +44,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
       setLoading(false);
 socket.emit("join chat", selectedChat._id);
       // socket.emit("join chat", selectedChat._id); // Removed
-    } catch (error) {
+    } catch (_error) {
       toast({
         title: "Error Occurred!",
         description: "Failed to load the messages",
@@ -53,6 +53,7 @@ socket.emit("join chat", selectedChat._id);
         isClosable: true,
         position: "bottom",
       });
+      
     }
   };
 
@@ -79,7 +80,7 @@ socket.emit("join chat", selectedChat._id);
   socket.emit("new message", data);
 
         setMessages([...messages, data]);
-      } catch (error) {
+      } catch (_error) {
         toast({
           title: "Error Occurred!",
           description: "Failed to send the message",
@@ -96,7 +97,7 @@ socket.emit("join chat", selectedChat._id);
      socket.emit("setup", user);
     socket.on("connected", () => setSocketConnected(true));
    
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     fetchMessages();

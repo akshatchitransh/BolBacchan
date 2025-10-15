@@ -28,7 +28,7 @@ import {
   DrawerCloseButton,
 } from '@chakra-ui/react'
 import ChatLoading from '../ChatLoading'
-import UserListItem from '../userAvatar/UserListItem'
+import UserListItem from '../UserAvatar/UserListItem'
 import axios from "axios";
 
 
